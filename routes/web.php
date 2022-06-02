@@ -21,6 +21,7 @@ Route::get('/{slug}', PageController::class)->where('slug', implode('|', array_k
 Route::any('greet', [ MessageController::class, 'incomingReq' ]);
 Route::get('greet/done', [ MessageController::class, 'msgSent' ])->name('greet.send');
 Route::get('greet/{id}', [ MessageController::class, 'show' ])->name('greet.show');
+Route::get('greet/{id}/preview', [ MessageController::class, 'previewEmail' ]);
 Route::post('send-message', [ MessageController::class, 'sendMessage' ])->name('send_msg');
 // Route::get('/demo', FrontPageController::class);
 

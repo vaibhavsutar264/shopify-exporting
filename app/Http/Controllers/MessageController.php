@@ -7,9 +7,15 @@ use App\Http\Requests\SendMessageRequest;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Notifications\SendGreetMessageNotification;
+
 
 class MessageController extends Controller
 {
+    function previewEmail($id) {
+        $msg = Message::where('uuid', $id)->first();
+        return (new SendGreetMessageNotification($msg))->toMail($msg->user);
+    }
    public function sendMessage(SendMessageRequest $request)
    {
       $inputs = $request->validated();
